@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
                 cloud, std::chrono::nanoseconds{scan_ts}, lidar_frame);
 
             auto ts = std::chrono::system_clock::now();
-            ROS_DEBUG_NAMED("ouster", "[points]: %lu us",
+            ROS_INFO_NAMED("ouster", "[points]: %lu us",
                 std::chrono::time_point_cast<std::chrono::microseconds>(ts).time_since_epoch().count());
 
             lidar_pub.publish(msg);
