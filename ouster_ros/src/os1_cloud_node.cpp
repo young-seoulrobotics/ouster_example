@@ -59,6 +59,11 @@ int main(int argc, char** argv) {
         [&](uint64_t scan_ts) mutable {
             msg = ouster_ros::OS1::cloud_to_cloud_msg(
                 cloud, std::chrono::nanoseconds{scan_ts}, lidar_frame);
+
+            auto ts = std::chrono::system_clock::now();
+            ROS_DEBUG_NAMED("ouster", "[points]: %lu us",
+                std::chrono::time_point_cast<std::chrono::microseconds>(ts).time_since_epoch().count());
+
             lidar_pub.publish(msg);
         });
 
