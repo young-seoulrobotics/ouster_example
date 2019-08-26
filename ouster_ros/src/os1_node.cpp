@@ -115,11 +115,6 @@ int connection_loop(ros::NodeHandle& nh, OS1::client& cli) {
         }
         if (state & OS1::LIDAR_DATA) {
             if (OS1::read_lidar_packet(cli, lidar_packet.buf.data())) {
-
-                auto ts = std::chrono::system_clock::now();
-                ROS_INFO_NAMED("ouster", "[raw_packet]: %lu us",
-                    std::chrono::time_point_cast<std::chrono::microseconds>(ts).time_since_epoch().count());
-
                 lidar_packet_pub.publish(lidar_packet);
             }
         }
